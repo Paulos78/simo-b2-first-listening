@@ -1,7 +1,7 @@
 "use strict";
 (() => {
 const $ = id => document.getElementById(id);
-const storageKey = "simo-cambridge-b2-first-listening-v1";
+const storageKey = "simo-b2-first-five-clips-v3";
 const reportApi = "https://formsubmit.co/ajax/6fb9c839342d08b12e0889243652a8f4";
 const parts = EXAM.parts;
 const total = parts.reduce((n, p) => n + p.questions.length, 0);
@@ -25,9 +25,9 @@ function report(){
 }
 function reportText(){
  const r=report();
- return ["B2 FIRST STYLE LISTENING MOCK — SIMO","Student: "+r.name,"Email: "+(r.email||"not provided"),
+ return ["B2 LISTENING: 5 CLIPS / 30 QUESTIONS — SIMO","Student: "+r.name,"Email: "+(r.email||"not provided"),
  "Finished: "+new Date(r.finishedAt).toISOString(),"Score: "+r.score+"/"+r.total+" ("+r.percent+"%)",
- "Completed: "+r.answered+"/"+r.total,"Minutes: "+r.minutes,"","PART RESULTS",...r.byPart.map((s,i)=>(i+1)+". "+s.part+" "+s.got+"/"+s.total),
+ "Completed: "+r.answered+"/"+r.total,"Minutes: "+r.minutes,"","CLIP SCORES",...r.byPart.map((s,i)=>(i+1)+". "+s.part+" "+s.got+"/"+s.total),
  "","QUESTION DETAIL",...r.detail.map(a=>a.id+". "+a.task+"\nStudent: "+a.answer+"\nCorrect: "+a.correctAnswer+"\n"+(a.isCorrect?"CORRECT":"INCORRECT")+"\nReason: "+a.explanation+"\n")].join("\n");
 }
 function updateProgress(){
@@ -54,12 +54,13 @@ function questionHtml(p,q,index){
 }
 function renderPart(){
  const p=parts[state.part];
- $("partKicker").textContent="PART "+(state.part+1)+" OF 4 · "+p.questions.length+" QUESTIONS · "+p.time+" MIN RECOMMENDED";
+ $("partKicker").textContent="CLIP "+(state.part+1)+" OF 5 · "+p.questions.length+" QUESTIONS · "+p.time+" MIN RECOMMENDED";
  $("partTitle").textContent=p.title;
  $("partSubtitle").textContent=p.subtitle;
- const audio=$("sectionAudio");audio.pause();audio.src="./"+p.audio;audio.load();
+ const player=$("groupAudio");player.pause();player.src="./"+p.audio;player.load();
  const prefix=p.type==="matching" ? '<div class="matching-guidance"><strong>Statements A–H</strong><p>Use each statement at most once; three statements are extra.</p><ol class="statements-list">'+p.options.map((v,i)=>'<li><strong>'+('ABCDEFGH'[i])+'.</strong> '+esc(v)+'</li>').join('')+'</ol></div>':"";
  $("questions").innerHTML=prefix+p.questions.map((q,i)=>questionHtml(p,q,i)).join("");
+
  $("questions").querySelectorAll("input[data-gap]").forEach(input=>input.addEventListener("input",()=>{state.answers[input.dataset.gap]=input.value;save();updateProgress();}));
  $("questions").querySelectorAll("input[data-choice],select[data-match]").forEach(input=>input.addEventListener("change",()=>{const id=input.dataset.choice||input.dataset.match;if(input.value==="")delete state.answers[id];else state.answers[id]=Number(input.value);save();updateProgress();}));
  $("backButton").disabled=state.part===0;
@@ -94,9 +95,9 @@ function start(){
 }
 function finish(expired){
  if(state.finishedAt)return;
- if(!expired&&!window.confirm("Submit your B2 listening paper? You have answered "+answered()+" of "+total+" questions. You cannot change your answers afterwards."))return;
+ if(!expired&&!window.confirm("Submit your B2 listening test? You have answered "+answered()+" of "+total+" questions. You cannot change your answers afterwards."))return;
  state.finishedAt=expired?state.endAt:Date.now();save();if(interval)clearInterval(interval);
- $("sectionAudio").pause();showResults();sendReport();
+ document.querySelectorAll("audio").forEach(a=>a.pause());showResults();sendReport();
 }
 function showResults(){
  $("welcome").classList.add("hidden");$("exam").classList.add("hidden");$("results").classList.remove("hidden");
