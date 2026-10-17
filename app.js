@@ -57,7 +57,7 @@ function renderPart(){
  $("partKicker").textContent="CLIP "+(state.part+1)+" OF 5 · "+p.questions.length+" QUESTIONS · "+p.time+" MIN RECOMMENDED";
  $("partTitle").textContent=p.title;
  $("partSubtitle").textContent=p.subtitle;
- const player=$("groupAudio");player.pause();player.src="./"+p.audio;player.load();
+ const player=$("groupAudio");player.pause();player.src="./"+p.audio+"?v=kokoro-20261017";player.load();
  const prefix=p.type==="matching" ? '<div class="matching-guidance"><strong>Statements A–H</strong><p>Use each statement at most once; three statements are extra.</p><ol class="statements-list">'+p.options.map((v,i)=>'<li><strong>'+('ABCDEFGH'[i])+'.</strong> '+esc(v)+'</li>').join('')+'</ol></div>':"";
  $("questions").innerHTML=prefix+p.questions.map((q,i)=>questionHtml(p,q,i)).join("");
 
