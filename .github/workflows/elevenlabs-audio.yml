@@ -26,17 +26,17 @@ jobs:
 
       - name: Check configured ElevenLabs secret
         env:
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.SIMO }}
         run: |
           if [ -z "$ELEVENLABS_API_KEY" ]; then
-            echo "::error::Add ELEVENLABS_API_KEY in Settings > Secrets and variables > Actions before running."
+            echo "::error::Add the SIMO secret in Settings > Secrets and variables > Actions before running."
             exit 1
           fi
           echo "ElevenLabs credential present"
 
       - name: Produce five expressive B2 recordings
         env:
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.SIMO }}
         run: python3 generate_elevenlabs.py
 
       - name: Verify all audio recordings
