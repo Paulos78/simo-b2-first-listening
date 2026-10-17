@@ -6,23 +6,23 @@
 <title>Simo's B2 First · Listening Practice</title><link rel="stylesheet" href="./style.css">
 </head><body>
 <div class="site-top"><div class="wrap flex-top"><div class="brand"><span class="brand-icon">B<span>2</span></span><span>FIRST <strong>LISTENING</strong><small>ENGLISH PRACTICE STUDIO</small></span></div><div class="toplabel"><span class="live-dot"></span> STUDENT PRACTICE ASSESSMENT</div></div></div>
-<header class="hero"><div class="wrap hero-inner"><div class="eyebrow">CAMBRIDGE B2 FIRST <span class="accent-line"></span> LISTENING PRACTICE</div><h1>Listen for<br><em>what matters.</em></h1><p>Four exam-style listening tasks. Thirty questions. Listen beyond the obvious and distinguish facts, attitudes, intentions and opinions.</p>
-<div class="metrics"><div><b>45</b><small>MINUTES</small></div><div><b>04</b><small>EXAM PARTS</small></div><div><b>30</b><small>QUESTIONS</small></div><div><b>B2</b><small>FIRST LEVEL</small></div></div></div></header>
+<header class="hero"><div class="wrap hero-inner"><div class="eyebrow">CAMBRIDGE B2 FIRST <span class="accent-line"></span> LISTENING PRACTICE</div><h1>Listen for<br><em>what matters.</em></h1><p>Five short recordings, thirty B2-level questions. Listen beyond the obvious to understand facts, attitudes, intentions and opinions.</p>
+<div class="metrics"><div><b>45</b><small>MINUTES</small></div><div><b>05</b><small>SHORT CLIPS</small></div><div><b>30</b><small>QUESTIONS</small></div><div><b>B2</b><small>FIRST LEVEL</small></div></div></div></header>
 <main class="wrap">
-<section class="welcome panel" id="welcome"><div><div class="eyebrow dark">LISTENING PAPER / YOUR PRACTICE</div><h2>Ready, Simo?</h2><p>This is a complete original B2 First-style listening practice test. You will hear each recording <strong>twice</strong>. Read the questions carefully before pressing play, and answer as you listen.</p>
-<div class="tip"><span aria-hidden="true">◎</span> <strong>Four real exam task types:</strong> multiple choice, sentence completion, multiple matching and an extended interview. Your answers are marked automatically at the end.</div>
-<div class="sample"><span>Sound check</span><button type="button" id="sampleButton" class="ghost-button">▶ Play a short audio sample</button><audio id="sampleAudio" preload="none" src="./audio/part-1.mp3"></audio></div>
-<p class="fine">Bring headphones, work in a quiet place and allow 45 minutes. The exam countdown begins when you press Start. This is an independent B2 First-style mock, not an official Cambridge examination.</p></div>
+<section class="welcome panel" id="welcome"><div><div class="eyebrow dark">LISTENING PAPER / YOUR PRACTICE</div><h2>Ready, Simo?</h2><p>Five short B2-level listening clips, each containing six numbered extracts. Listen to a clip, then answer its six multiple-choice questions. Replay when you need to.</p>
+<div class="tip"><span aria-hidden="true">◎</span> <strong>30 multiple-choice questions:</strong> five audio clips with six questions each. The questions assess B2-level detail, inference, intention and attitude. Automatically marked at the end.</div>
+<div class="sample"><span>Sound check</span><button type="button" id="sampleButton" class="ghost-button">▶ Play a short audio sample</button><audio id="sampleAudio" preload="none" src="./audio/group-1.mp3"></audio></div>
+<p class="fine">Bring headphones, work in a quiet place and allow 45 minutes. The exam countdown begins when you press Start. Original B2-level skills practice, arranged in five clips. This does not reproduce the official Cambridge paper format.</p></div>
 <div class="start-card"><label for="studentName">Student name</label><input id="studentName" maxlength="75" value="Simone" autocomplete="name" required>
 <label for="studentEmail">Student email <span class="muted">(optional)</span></label><input id="studentEmail" maxlength="160" type="email" placeholder="simone@example.com" autocomplete="email">
 <label class="consent"><input type="checkbox" id="consent"><span>I agree to send my name, score and all my answers to my teacher via an external email-reporting service when I finish.</span></label>
 <button id="startButton" class="primary wide">Start B2 Listening <span>→</span></button><button id="resumeButton" class="secondary wide hidden">Resume saved attempt →</button>
 <p class="fine">Results are stored on this device. With your consent, a detailed report is also submitted to your teacher through FormSubmit. You can download the full result as a CSV file.</p>
 </div></section>
-<section id="exam" class="hidden"><div class="exam-top"><div><div class="eyebrow dark">B2 FIRST / LISTENING PAPER</div><h2 id="examHeading">B2 First Listening</h2><p id="answeredLabel">0 of 30 questions answered</p></div><div class="clock"><span>TIME LEFT</span><strong id="timer">45:00</strong></div></div>
+<section id="exam" class="hidden"><div class="exam-top"><div><div class="eyebrow dark">B2 LISTENING / PRACTICE PAPER</div><h2 id="examHeading">B2 First Listening</h2><p id="answeredLabel">0 of 30 questions answered</p></div><div class="clock"><span>TIME LEFT</span><strong id="timer">45:00</strong></div></div>
 <div class="progress-track"><div id="progressFill"></div></div><nav class="part-nav" id="partNav" aria-label="Listening paper navigation"></nav>
-<div class="exam-grid"><section class="exam-main panel"><div class="part-kicker" id="partKicker">PART 1 OF 4</div><h2 id="partTitle">Loading…</h2><p id="partSubtitle" class="muted"></p>
-<div class="audio-box"><div class="audio-heading"><span class="headphone">♫</span><div><b>Listening recording</b><small>Each passage is played twice in the track. Press Play to begin.</small></div></div><audio id="sectionAudio" controls preload="none" controlsList="nodownload"></audio><div class="sound-note">Exam practice tip: Read the questions first. Be alert for changed opinions and tempting but incorrect details.</div></div>
+<div class="exam-grid"><section class="exam-main panel"><div class="part-kicker" id="partKicker">CLIP 1 OF 5</div><h2 id="partTitle">Loading…</h2><p id="partSubtitle" class="muted"></p>
+<div class="audio-box"><div class="audio-heading"><span class="headphone">♫</span><div><b>Listen to this set of six extracts</b><small>Numbered questions 1–6, 7–12, etc. Replay the clip if needed.</small></div></div><audio id="groupAudio" controls preload="none"></audio><div class="sound-note">Each question has its own numbered short passage inside this recording. Listen for implied meaning and changes of attitude.</div></div>
 <div id="questions" class="questions"></div><div class="bottom-nav"><button id="backButton" class="secondary">← Previous part</button><button id="nextButton" class="primary">Next part →</button></div>
 </section><aside class="exam-aside"><div class="side-panel"><div class="eyebrow dark">ANSWER PROGRESS</div><h3 id="sideCount">0 / 30</h3><p>Questions attempted</p><div class="section-list" id="sectionList"></div><p class="side-note">Work is automatically saved in this browser. Questions carry one mark each.</p></div>
 <button class="finish-button" id="finishButton">Submit and mark my exam</button><p class="fine center">Unanswered questions score zero. The paper submits automatically after 45 minutes.</p></aside></div></section>
@@ -33,6 +33,6 @@
 <h3 class="break-title">Part-by-part scores</h3><div id="scoreBreakdown"></div>
 <h3 class="break-title">Question review</h3><p class="muted">Your answers, correct answers and explanations appear below.</p><div id="answerReview"></div>
 <button id="restartButton" class="secondary restart">Start a new attempt</button></section>
-</main><footer>Original B2 First-style listening practice · Not affiliated with Cambridge English · Synthetic narration, not ElevenLabs</footer>
+</main><footer>Original B2-level listening practice · Not affiliated with Cambridge English · Synthetic narration, not ElevenLabs</footer>
 <script src="./exam-data.js"></script><script src="./app.js"></script>
 </body></html>
