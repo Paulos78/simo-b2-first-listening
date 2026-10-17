@@ -1,0 +1,61 @@
+name: Generate Free Kokoro AI Listening Audio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kokoro-b2-audio
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    name: Generate five expressive recordings free
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install synthesis dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          python -m pip install --disable-pip-version-check 'kokoro-onnx==0.6.1' 'soundfile==0.14.0'
+
+      - name: Download licensed Kokoro model and voices
+        run: |
+          mkdir -p .kokoro-model
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.0.onnx' \
+            -o .kokoro-model/kokoro-v1.0.onnx
+          curl --fail --location --retry 3 --silent --show-error \
+            'https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.0.bin' \
+            -o .kokoro-model/voices-v1.0.bin
+          test "$(wc -c < .kokoro-model/kokoro-v1.0.onnx)" -gt 80000000
+          test "$(wc -c < .kokoro-model/voices-v1.0.bin)" -gt 1000000
+
+      - name: Generate five groups of British and American voices
+        run: python -u generate_kokoro.py
+
+      - name: Verify recordings
+        run: |
+          for n in 1 2 3 4 5; do
+            test -s "audio/group-$n.mp3"
+            ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 "audio/group-$n.mp3"
+          done
+
+      - name: Commit and publish to GitHub Pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add audio/group-1.mp3 audio/group-2.mp3 audio/group-3.mp3 audio/group-4.mp3 audio/group-5.mp3
+          if ! git diff --cached --quiet; then
+            git commit -m "Regenerate B2 exam voices using free Kokoro AI"
+            git push origin HEAD:main
+          fi
