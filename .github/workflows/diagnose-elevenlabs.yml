@@ -1,0 +1,15 @@
+name: Check ElevenLabs Account
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diagnose ElevenLabs subscription and voices
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.SIMO }}
+        run: python3 diagnose_elevenlabs.py
